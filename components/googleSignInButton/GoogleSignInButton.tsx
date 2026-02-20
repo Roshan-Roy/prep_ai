@@ -5,8 +5,10 @@ import { FcGoogle } from "react-icons/fc"
 import { Button } from "../ui/button"
 import { signIn, signOut } from "@/lib/auth-client"
 import Link from "next/link"
+import { useState } from "react"
 
-const GoogleSignInButton = ({ variant = "google" }) => {
+const GoogleSignInButton = ({ variant = "google" }: { variant?: "google" | "header" }) => {
+    const [signOutLoading, setSignOutLoading] = useState(false)
     const { data: session } = useSession()
 
     const handleSignIn = async () => {
@@ -16,12 +18,14 @@ const GoogleSignInButton = ({ variant = "google" }) => {
         })
     }
     const handleSignOut = async () => {
+        setSignOutLoading(true)
         await signOut()
+        setSignOutLoading(false)
     }
 
     if (variant === "header") {
         return (
-            <Button className="px-8 rounded-full" variant="secondary" onClick={session ? handleSignOut : handleSignIn}>{session ? "Sign out" : "Sign in"}</Button>
+            <Button className="px-7 rounded-full" variant="secondary" onClick={session ? handleSignOut : handleSignIn} disabled={signOutLoading}>{signOutLoading ? "Signing out..." : session ? "Sign out" : "Sign in"}</Button>
         )
     }
 
