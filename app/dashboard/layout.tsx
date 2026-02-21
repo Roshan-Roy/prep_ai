@@ -10,26 +10,28 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     })
     return (
         <>
-            <div className="flex justify-between items-center mx-auto w-17/20 h-16 lg:h-18 max-w-6xl">
-                <Link href="/" className="font-semibold lg:text-lg">PrepAI</Link>
-                <div className="flex items-center gap-3">
-                    <div className="relative w-11 h-11">
-                        {session?.user.image && (
-                            <Image
-                                src={session.user.image}
-                                alt="profile image"
-                                className="rounded-full"
-                                fill
-                            />
-                        )}
-                    </div>
-                    <div className="flex flex-col font-semibold gap-0.5">
-                        <span className="text-sm">{session?.user.name.split(" ")[0]}</span>
-                        <SignOutBtn />
+            <div className="fixed w-full border-b border-muted bg-white">
+                <div className="flex justify-between items-center mx-auto w-17/20 h-16 lg:h-18 max-w-6xl">
+                    <Link href="/" className="font-semibold lg:text-lg">PrepAI</Link>
+                    <div className="flex items-center gap-3">
+                        <div className="relative w-11 h-11">
+                            {session?.user.image && (
+                                <Image
+                                    src={session.user.image}
+                                    alt="profile image"
+                                    className="rounded-full"
+                                    fill
+                                />
+                            )}
+                        </div>
+                        <div className="flex flex-col font-semibold gap-0.5">
+                            <span className="text-sm">{session?.user.name.split(" ")[0]}</span>
+                            <SignOutBtn />
+                        </div>
                     </div>
                 </div>
-
             </div>
+            <div className="h-16 lg:h-18"></div>
             {children}
         </>
     )
