@@ -19,7 +19,7 @@ You are an expert technical interviewer and career coach AI trained to generate 
 
 CONTEXT:
 - Job Role: ${role}
-- Candidate Experience: ${experience}
+- Candidate Experience: ${experience} year
 - Focus Topics: ${topics}
 - Additional Description: ${description}
 
@@ -51,24 +51,38 @@ OUTPUT FORMAT:
 `
 }
 
-export async function POST(request: Request) {
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY!,
+})
+
+const generateInterviewQuestions = async (params: PromptParams) => {
     try {
-        const data = await request.json()
-
-        const ai = new GoogleGenAI({
-            apiKey: process.env.GEMINI_API_KEY!,
-        })
-
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
-            contents: generateInterviewQuestionsPrompt(data),
+            contents: generateInterviewQuestionsPrompt(params),
+            config: {
+                responseMimeType: "application/json"
+            },
         })
 
-        return Response.json({
-            result: response.text,
-        })
-    } catch (error) {
-        console.log(error)
-        return Response.json({ error }, { status: 500 });
+        const responseText = response.text
+
+        if (!responseText) {
+            throw new Error("Gemini returned empty response")
+        }
+
+        let data = null
+
+        try {
+            data = JSON.parse(responseText)
+        } catch {
+            throw new Error("JSON parse failed")
+        }
+
+        return data
+    } catch (e) {
+        throw new Error("Failed to generate interview questions")
     }
 }
+
+export default generateInterviewQuestions

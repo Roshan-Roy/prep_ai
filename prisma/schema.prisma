@@ -23,6 +23,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  roles         Role[]
 
   @@unique([email])
   @@map("user")
@@ -74,4 +75,34 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Role {
+  id          String @id @default(cuid())
+  role        String
+  experience  String
+  topics      String
+  description String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  questions QuestionAnswer[]
+
+  createdAt DateTime @default(now())
+
+  @@map("role")
+}
+
+model QuestionAnswer {
+  id       String @id @default(cuid())
+  question String
+  answer   String
+
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("question_answer")
 }

@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
-import { auth } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server"
+import { headers } from "next/headers"
+import { auth } from "@/lib/auth"
 
 export async function proxy(request: NextRequest) {
     const session = await auth.api.getSession({
@@ -8,12 +8,18 @@ export async function proxy(request: NextRequest) {
     })
 
     if (!session) {
+        if (request.nextUrl.pathname.startsWith("/api")) {
+            return NextResponse.json(
+                { error: "Unauthorized" },
+                { status: 401 }
+            )
+        }
         return NextResponse.redirect(new URL("/", request.url));
     }
 
-    return NextResponse.next();
+    return NextResponse.next()
 }
 
 export const config = {
-    matcher: ["/dashboard"],
-};
+    matcher: ["/dashboard", "/api/addrole"],
+}

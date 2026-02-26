@@ -59,3 +59,13 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Role
+ * 
+ */
+export type Role = Prisma.RoleModel
+/**
+ * Model QuestionAnswer
+ * 
+ */
+export type QuestionAnswer = Prisma.QuestionAnswerModel
