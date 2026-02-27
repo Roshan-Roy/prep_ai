@@ -16,7 +16,6 @@ import { Label } from "@/components/ui/label"
 import { Plus } from "lucide-react"
 import { useState } from "react"
 import { Spinner } from "@/components/ui/spinner"
-import axios from "axios"
 
 type FormData = {
     role: string
@@ -51,13 +50,27 @@ const AddRole = () => {
             }))
         }
     }
-    const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            setBtnLoading(true)
-            await axios.post("/api/addrole", data)
-            //redirect
-        } catch (e) {
+            setBtnLoading(true);
+
+            const res = await fetch("/api/addrole", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+
+            if (!res.ok) {
+                throw new Error("Failed to add role")
+            }
+
+            // redirect here if needed
+            // router.push("/dashboard")
+
+        } catch (error) {
             setBtnLoading(false)
         }
     }

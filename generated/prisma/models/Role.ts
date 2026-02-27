@@ -32,6 +32,7 @@ export type RoleMinAggregateOutputType = {
   description: string | null
   userId: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type RoleMaxAggregateOutputType = {
@@ -42,6 +43,7 @@ export type RoleMaxAggregateOutputType = {
   description: string | null
   userId: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type RoleCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type RoleCountAggregateOutputType = {
   description: number
   userId: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type RoleMinAggregateInputType = {
   description?: true
   userId?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type RoleMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type RoleMaxAggregateInputType = {
   description?: true
   userId?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type RoleCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type RoleCountAggregateInputType = {
   description?: true
   userId?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -167,6 +173,7 @@ export type RoleGroupByOutputType = {
   description: string
   userId: string
   createdAt: Date
+  updatedAt: Date
   _count: RoleCountAggregateOutputType | null
   _min: RoleMinAggregateOutputType | null
   _max: RoleMaxAggregateOutputType | null
@@ -198,6 +205,7 @@ export type RoleWhereInput = {
   description?: Prisma.StringFilter<"Role"> | string
   userId?: Prisma.StringFilter<"Role"> | string
   createdAt?: Prisma.DateTimeFilter<"Role"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Role"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   questions?: Prisma.QuestionAnswerListRelationFilter
 }
@@ -210,6 +218,7 @@ export type RoleOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   questions?: Prisma.QuestionAnswerOrderByRelationAggregateInput
 }
@@ -225,6 +234,7 @@ export type RoleWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"Role"> | string
   userId?: Prisma.StringFilter<"Role"> | string
   createdAt?: Prisma.DateTimeFilter<"Role"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Role"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   questions?: Prisma.QuestionAnswerListRelationFilter
 }, "id">
@@ -237,6 +247,7 @@ export type RoleOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.RoleCountOrderByAggregateInput
   _max?: Prisma.RoleMaxOrderByAggregateInput
   _min?: Prisma.RoleMinOrderByAggregateInput
@@ -253,6 +264,7 @@ export type RoleScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"Role"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Role"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Role"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Role"> | Date | string
 }
 
 export type RoleCreateInput = {
@@ -262,6 +274,7 @@ export type RoleCreateInput = {
   topics: string
   description: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutRolesInput
   questions?: Prisma.QuestionAnswerCreateNestedManyWithoutRoleInput
 }
@@ -274,6 +287,7 @@ export type RoleUncheckedCreateInput = {
   description: string
   userId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   questions?: Prisma.QuestionAnswerUncheckedCreateNestedManyWithoutRoleInput
 }
 
@@ -284,6 +298,7 @@ export type RoleUpdateInput = {
   topics?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutRolesNestedInput
   questions?: Prisma.QuestionAnswerUpdateManyWithoutRoleNestedInput
 }
@@ -296,6 +311,7 @@ export type RoleUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questions?: Prisma.QuestionAnswerUncheckedUpdateManyWithoutRoleNestedInput
 }
 
@@ -307,6 +323,7 @@ export type RoleCreateManyInput = {
   description: string
   userId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type RoleUpdateManyMutationInput = {
@@ -316,6 +333,7 @@ export type RoleUpdateManyMutationInput = {
   topics?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoleUncheckedUpdateManyInput = {
@@ -326,6 +344,7 @@ export type RoleUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoleListRelationFilter = {
@@ -346,6 +365,7 @@ export type RoleCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RoleMaxOrderByAggregateInput = {
@@ -356,6 +376,7 @@ export type RoleMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RoleMinOrderByAggregateInput = {
@@ -366,6 +387,7 @@ export type RoleMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type RoleScalarRelationFilter = {
@@ -436,6 +458,7 @@ export type RoleCreateWithoutUserInput = {
   topics: string
   description: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   questions?: Prisma.QuestionAnswerCreateNestedManyWithoutRoleInput
 }
 
@@ -446,6 +469,7 @@ export type RoleUncheckedCreateWithoutUserInput = {
   topics: string
   description: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   questions?: Prisma.QuestionAnswerUncheckedCreateNestedManyWithoutRoleInput
 }
 
@@ -486,6 +510,7 @@ export type RoleScalarWhereInput = {
   description?: Prisma.StringFilter<"Role"> | string
   userId?: Prisma.StringFilter<"Role"> | string
   createdAt?: Prisma.DateTimeFilter<"Role"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Role"> | Date | string
 }
 
 export type RoleCreateWithoutQuestionsInput = {
@@ -495,6 +520,7 @@ export type RoleCreateWithoutQuestionsInput = {
   topics: string
   description: string
   createdAt?: Date | string
+  updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutRolesInput
 }
 
@@ -506,6 +532,7 @@ export type RoleUncheckedCreateWithoutQuestionsInput = {
   description: string
   userId: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type RoleCreateOrConnectWithoutQuestionsInput = {
@@ -531,6 +558,7 @@ export type RoleUpdateWithoutQuestionsInput = {
   topics?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutRolesNestedInput
 }
 
@@ -542,6 +570,7 @@ export type RoleUncheckedUpdateWithoutQuestionsInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RoleCreateManyUserInput = {
@@ -551,6 +580,7 @@ export type RoleCreateManyUserInput = {
   topics: string
   description: string
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type RoleUpdateWithoutUserInput = {
@@ -560,6 +590,7 @@ export type RoleUpdateWithoutUserInput = {
   topics?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questions?: Prisma.QuestionAnswerUpdateManyWithoutRoleNestedInput
 }
 
@@ -570,6 +601,7 @@ export type RoleUncheckedUpdateWithoutUserInput = {
   topics?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   questions?: Prisma.QuestionAnswerUncheckedUpdateManyWithoutRoleNestedInput
 }
 
@@ -580,6 +612,7 @@ export type RoleUncheckedUpdateManyWithoutUserInput = {
   topics?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -621,6 +654,7 @@ export type RoleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   description?: boolean
   userId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   questions?: boolean | Prisma.Role$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -634,6 +668,7 @@ export type RoleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   userId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["role"]>
 
@@ -645,6 +680,7 @@ export type RoleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   description?: boolean
   userId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["role"]>
 
@@ -656,9 +692,10 @@ export type RoleSelectScalar = {
   description?: boolean
   userId?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type RoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "experience" | "topics" | "description" | "userId" | "createdAt", ExtArgs["result"]["role"]>
+export type RoleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "role" | "experience" | "topics" | "description" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["role"]>
 export type RoleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   questions?: boolean | Prisma.Role$questionsArgs<ExtArgs>
@@ -685,6 +722,7 @@ export type $RolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     description: string
     userId: string
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["role"]>
   composites: {}
 }
@@ -1117,6 +1155,7 @@ export interface RoleFieldRefs {
   readonly description: Prisma.FieldRef<"Role", 'String'>
   readonly userId: Prisma.FieldRef<"Role", 'String'>
   readonly createdAt: Prisma.FieldRef<"Role", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Role", 'DateTime'>
 }
     
 

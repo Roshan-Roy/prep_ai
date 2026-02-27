@@ -90,6 +90,7 @@ model Role {
   questions QuestionAnswer[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("role")
 }
