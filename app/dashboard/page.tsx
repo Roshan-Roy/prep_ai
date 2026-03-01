@@ -2,7 +2,7 @@ import RoleCard from "@/components/roleCard/RoleCard"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
-import AddRole from "@/components/addRoleModal/AddRole"
+import AddRoleModal from "@/components/addRoleModal/AddRoleModal"
 
 const Page = async () => {
     const session = await auth.api.getSession({
@@ -34,7 +34,7 @@ const Page = async () => {
                     />)}
                 </div>
             </div>
-            <AddRole />
+            <AddRoleModal />
         </>
     )
 }

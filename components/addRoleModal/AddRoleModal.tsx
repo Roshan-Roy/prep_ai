@@ -24,7 +24,7 @@ type FormData = {
     description: string
 }
 
-const AddRole = () => {
+const AddRoleModal = () => {
     const getInitialData = (): FormData => ({
         role: "",
         experience: "",
@@ -118,4 +118,4 @@ const AddRole = () => {
     )
 }
 
-export default AddRole
+export default AddRoleModal

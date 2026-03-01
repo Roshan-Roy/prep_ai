@@ -28,7 +28,7 @@ const Page = async ({
 
     return (
         <Suspense fallback={<p>Loading...</p>}>
-            <RoleWithDetails rolePromise={rolePromise}/>
+            <RoleWithDetails roleId={id} rolePromise={rolePromise} />
         </Suspense>
     )
 }

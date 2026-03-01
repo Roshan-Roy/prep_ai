@@ -1,20 +1,16 @@
 import prisma from "./prisma"
 
-const getRoleWithQuestions = async (id: string, userId: string) => {
-    try {
-        const role = await prisma.role.findUnique({
-            where: { id, userId },
-            include: { questions: true },
-        })
+const getRoleWithQuestions = async (roleId: string, userId: string) => {
+    const role = await prisma.role.findUnique({
+        where: { id: roleId },
+        include: { questions: true },
+    })
 
-        if (!role) {
-            throw new Error("Role not found")
-        }
-
-        return role
-    } catch (error) {
-        throw error
+    if (!role || role.userId !== userId) {
+        throw new Error("Role not found")
     }
+
+    return role
 }
 
-export default getRoleWithQuestions 
+export default getRoleWithQuestions

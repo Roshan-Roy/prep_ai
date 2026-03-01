@@ -9,7 +9,6 @@ type PromptParams = {
 
 type ExistingQA = {
     question: string;
-    answer: string;
 }
 
 const generateMoreInterviewQuestionsPrompt = (
