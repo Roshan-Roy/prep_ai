@@ -7,8 +7,7 @@ import {
     DialogDescription,
     DialogFooter,
     DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+    DialogTitle
 } from "@/components/ui/dialog"
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
@@ -16,6 +15,8 @@ import { Label } from "@/components/ui/label"
 import { Plus } from "lucide-react"
 import { useState } from "react"
 import { Spinner } from "@/components/ui/spinner"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 type FormData = {
     role: string
@@ -25,6 +26,7 @@ type FormData = {
 }
 
 const AddRoleModal = () => {
+    const router = useRouter()
     const getInitialData = (): FormData => ({
         role: "",
         experience: "",
@@ -50,10 +52,10 @@ const AddRoleModal = () => {
             }))
         }
     }
-    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleFormSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            setBtnLoading(true);
+            setBtnLoading(true)
 
             const res = await fetch("/api/addrole", {
                 method: "POST",
@@ -67,10 +69,11 @@ const AddRoleModal = () => {
                 throw new Error("Failed to add role")
             }
 
-            // redirect here if needed
-            // router.push("/dashboard")
+            const newRole = await res.json()
 
-        } catch (error) {
+            router.push(`/dashboard/${newRole.data.id}`)
+        } catch (e) {
+            toast.error("An error occurred")
             setBtnLoading(false)
         }
     }
@@ -90,7 +93,7 @@ const AddRoleModal = () => {
                                 Fill out a few quick details and unlock your personalized set of interview questions!
                             </DialogDescription>
                         </DialogHeader>
-                        <FieldGroup className="gap-6">
+                        <FieldGroup className="gap-6 mt-1">
                             <Field>
                                 <Label htmlFor="role">Target Role</Label>
                                 <Input id="role" name="role" placeholder="e.g. Frontend Developer, UI/UX Designer, etc." className="h-10 px-3.5" value={data.role} onChange={handleInputChange} />

@@ -1,8 +1,24 @@
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
-import getRoleWithQuestions from "@/lib/getRoleWithQuestions"
 import { Suspense } from "react"
 import RoleWithDetails from "@/components/roleWithDetails/RoleWithDetails"
+import ErrorPage from "@/components/errorPage/ErrorPage"
+import RoleWithDetailsFallback from "@/components/roleWithDetails/RoleWithDetailsFallback"
+import { notFound } from "next/navigation"
+import prisma from "@/lib/prisma"
+
+const getRoleWithQuestions = async (roleId: string, userId: string) => {
+    const role = await prisma.role.findUnique({
+        where: { id: roleId },
+        include: { questions: true },
+    })
+
+    if (!role || role.userId !== userId) {
+        notFound()
+    }
+
+    return role
+}
 
 const Page = async ({
     params,
@@ -11,23 +27,18 @@ const Page = async ({
 }) => {
     const { id } = await params
 
-    let session = null
-    try {
-        session = await auth.api.getSession({
-            headers: await headers(),
-        })
-    } catch (e) {
-        return <p>An error occurred</p>
-    }
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    })
 
     if (!session) {
-        return <p>Un authorized</p>
+        return <ErrorPage message="Unauthorized" />
     }
 
     const rolePromise = getRoleWithQuestions(id, session.user.id)
 
     return (
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<RoleWithDetailsFallback />}>
             <RoleWithDetails roleId={id} rolePromise={rolePromise} />
         </Suspense>
     )

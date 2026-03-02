@@ -57,6 +57,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             message: "Role added successfully",
+            data: newRole
         })
     } catch (e) {
         return NextResponse.json(

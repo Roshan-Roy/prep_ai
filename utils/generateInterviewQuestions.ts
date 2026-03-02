@@ -56,32 +56,24 @@ const ai = new GoogleGenAI({
 })
 
 const generateInterviewQuestions = async (params: PromptParams) => {
+    const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: generateInterviewQuestionsPrompt(params),
+        config: {
+            responseMimeType: "application/json",
+        },
+    })
+
+    const responseText = response.text
+
+    if (!responseText) {
+        throw new Error("AI returned empty response")
+    }
+
     try {
-        const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: generateInterviewQuestionsPrompt(params),
-            config: {
-                responseMimeType: "application/json"
-            },
-        })
-
-        const responseText = response.text
-
-        if (!responseText) {
-            throw new Error("Gemini returned empty response")
-        }
-
-        let data = null
-
-        try {
-            data = JSON.parse(responseText)
-        } catch {
-            throw new Error("JSON parse failed")
-        }
-
-        return data
-    } catch (e) {
-        throw new Error("Failed to generate interview questions")
+        return JSON.parse(responseText)
+    } catch {
+        throw new Error("Invalid JSON returned by AI")
     }
 }
 

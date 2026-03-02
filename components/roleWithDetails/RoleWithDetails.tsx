@@ -18,6 +18,7 @@ import { Button } from "../ui/button"
 import { useState, use } from "react"
 import { Spinner } from "../ui/spinner"
 import formatDateWithSuffix from "@/utils/formatDateWithSuffix"
+import toast from "react-hot-toast"
 
 const RoleWithDetails = ({
     roleId,
@@ -49,7 +50,7 @@ const RoleWithDetails = ({
             const updatedRole = await res.json()
             setData(updatedRole.data)
         } catch (e) {
-            alert("An error occurred")
+            toast.error("An error occurred")
         } finally {
             setBtnLoading(false)
         }
