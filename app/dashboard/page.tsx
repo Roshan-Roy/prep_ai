@@ -4,13 +4,14 @@ import { auth } from "@/lib/auth"
 import prisma from "@/lib/prisma"
 import AddRoleModal from "@/components/addRoleModal/AddRoleModal"
 import ErrorPage from "@/components/errorPage/ErrorPage"
+import { redirect } from "next/navigation"
 
 const Page = async () => {
     const session = await auth.api.getSession({
         headers: await headers()
     })
     if (!session) {
-        return <ErrorPage message="Unauthorized" />
+        redirect("/")
     }
 
     const roles = await prisma.role.findMany({

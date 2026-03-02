@@ -2,10 +2,10 @@ import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
 import { Suspense } from "react"
 import RoleWithDetails from "@/components/roleWithDetails/RoleWithDetails"
-import ErrorPage from "@/components/errorPage/ErrorPage"
 import RoleWithDetailsSkeleton from "@/components/roleWithDetails/RoleWithDetailsSkeleton"
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
+import { redirect } from "next/navigation"
 
 const getRoleWithQuestions = async (roleId: string, userId: string) => {
     const role = await prisma.role.findUnique({
@@ -32,7 +32,7 @@ const Page = async ({
     })
 
     if (!session) {
-        return <ErrorPage message="Unauthorized" />
+        redirect("/")
     }
 
     const rolePromise = getRoleWithQuestions(id, session.user.id)
