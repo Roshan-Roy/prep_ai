@@ -3,7 +3,7 @@ import { headers } from "next/headers"
 import { Suspense } from "react"
 import RoleWithDetails from "@/components/roleWithDetails/RoleWithDetails"
 import ErrorPage from "@/components/errorPage/ErrorPage"
-import RoleWithDetailsFallback from "@/components/roleWithDetails/RoleWithDetailsFallback"
+import RoleWithDetailsSkeleton from "@/components/roleWithDetails/RoleWithDetailsSkeleton"
 import { notFound } from "next/navigation"
 import prisma from "@/lib/prisma"
 
@@ -38,7 +38,7 @@ const Page = async ({
     const rolePromise = getRoleWithQuestions(id, session.user.id)
 
     return (
-        <Suspense fallback={<RoleWithDetailsFallback />}>
+        <Suspense fallback={<RoleWithDetailsSkeleton />}>
             <RoleWithDetails roleId={id} rolePromise={rolePromise} />
         </Suspense>
     )

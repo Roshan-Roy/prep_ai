@@ -1,7 +1,7 @@
-import RoleWithDetailsFallback from "@/components/roleWithDetails/RoleWithDetailsFallback"
+import RoleWithDetailsSkeleton from "@/components/roleWithDetails/RoleWithDetailsSkeleton"
 
 const Loading = () => {
-    return <RoleWithDetailsFallback />
+    return <RoleWithDetailsSkeleton />
 }
 
 export default Loading

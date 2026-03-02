@@ -1,6 +1,6 @@
 import { Skeleton } from "../ui/skeleton"
 
-const RoleWithDetailsFallback = () => {
+const RoleWithDetailsSkeleton = () => {
     return (
         <>
             <div className="py-8 md:py-10">
@@ -30,4 +30,4 @@ const RoleWithDetailsFallback = () => {
     )
 }
 
-export default RoleWithDetailsFallback
+export default RoleWithDetailsSkeleton
