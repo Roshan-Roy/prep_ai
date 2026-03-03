@@ -6,10 +6,11 @@ import { Button } from "../ui/button"
 import { signIn, signOut } from "@/lib/auth-client"
 import Link from "next/link"
 import { useState } from "react"
+import { Skeleton } from "../ui/skeleton"
 
 const GoogleSignInButton = ({ variant = "google" }: { variant?: "google" | "header" }) => {
     const [signOutLoading, setSignOutLoading] = useState(false)
-    const { data: session } = useSession()
+    const { data: session, isPending } = useSession()
 
     const handleSignIn = async () => {
         await signIn.social({
@@ -24,11 +25,18 @@ const GoogleSignInButton = ({ variant = "google" }: { variant?: "google" | "head
     }
 
     if (variant === "header") {
+        if (isPending) {
+            return <Skeleton className="w-27.5 h-9 rounded-full" />
+        }
         return (
             <Button className="px-7 rounded-full" variant="secondary" onClick={session ? handleSignOut : handleSignIn} disabled={signOutLoading}>{signOutLoading ? "Signing out..." : session ? "Sign out" : "Sign in"}</Button>
         )
     }
 
+
+    if (isPending) {
+        return <Skeleton className="w-43 h-12 mt-4 rounded-full" />
+    }
     return (
         session ? (
             <Link className="flex justify-center items-center bg-primary hover:bg-primary/90 rounded-full mt-4 h-12 px-8" href="/dashboard">
