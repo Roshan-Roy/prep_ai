@@ -19,6 +19,8 @@ import { useState, use } from "react"
 import { Spinner } from "../ui/spinner"
 import formatDateWithSuffix from "@/utils/formatDateWithSuffix"
 import toast from "react-hot-toast"
+import { IoArrowBackOutline } from "react-icons/io5"
+import Link from "next/link"
 
 const RoleWithDetails = ({
     roleId,
@@ -59,20 +61,23 @@ const RoleWithDetails = ({
     return (
         <>
             <div className="bg-white py-8 md:py-10">
-                <div className="flex flex-col mx-auto w-17/20 max-w-6xl">
-                    <span className="font-semibold text-xl md:text-3xl truncate">{data.role}</span>
-                    <span className="text-sm md:text-base mt-1.5 md:mt-2 mb-3.5 md:mb-4 truncate">{data.topics}</span>
-                    <div className="flex gap-1 text-[10px] md:text-[12px] font-semibold">
-                        <div className="min-w-0 truncate py-1.5 md:py-2 px-3.5 md:px-5 bg-foreground text-background rounded-full">
-                            <span>Exp: {data.experience} {Number(data.experience) === 1 ? "yr" : "yrs"}</span>
-                        </div>
-                        <div className="min-w-0 truncate py-1.5 md:py-2 px-3.5 md:px-5 bg-foreground text-background rounded-full">
-                            <span>{data.questions.length} Q&A</span>
-                        </div>
-                        <div className="min-w-0 truncate py-1.5 md:py-2 px-3.5 md:px-5 bg-foreground text-background rounded-full">
-                            <span className="truncate">Last: {formatDateWithSuffix(data.updatedAt)}</span>
+                <div className="flex mx-auto w-17/20 max-w-6xl justify-between">
+                    <div className="flex flex-col min-w-0">
+                        <span className="font-semibold text-xl md:text-3xl truncate">{data.role}</span>
+                        <span className="text-sm md:text-base mt-1.5 md:mt-2 mb-3.5 md:mb-4 truncate">{data.topics}</span>
+                        <div className="flex gap-1 text-[10px] md:text-[12px] font-semibold">
+                            <div className="min-w-0 truncate py-1.5 md:py-2 px-3.5 md:px-5 bg-foreground text-background rounded-full">
+                                <span>Exp: {data.experience} {Number(data.experience) === 1 ? "yr" : "yrs"}</span>
+                            </div>
+                            <div className="min-w-0 truncate py-1.5 md:py-2 px-3.5 md:px-5 bg-foreground text-background rounded-full">
+                                <span>{data.questions.length} Q&A</span>
+                            </div>
+                            <div className="min-w-0 truncate py-1.5 md:py-2 px-3.5 md:px-5 bg-foreground text-background rounded-full">
+                                <span className="truncate">Last: {formatDateWithSuffix(data.updatedAt)}</span>
+                            </div>
                         </div>
                     </div>
+                    <Link href="/dashboard"><IoArrowBackOutline className="text-lg md:text-xl shrink-0" /></Link>
                 </div>
             </div>
             <div className="bg-gray-50 pt-4 md:pt-6 pb-14 md:pb-18">
