@@ -72,7 +72,6 @@ const AddRoleModal = () => {
             const newRole = await res.json()
 
             router.push(`/dashboard/${newRole.data.id}`)
-            router.refresh()
         } catch (e) {
             toast.error("An error occurred")
             setBtnLoading(false)
